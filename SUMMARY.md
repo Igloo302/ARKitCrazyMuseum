@@ -1,7 +1,6 @@
 # Table of contents
 
 * [Initial page](README.md)
-* [Untitled](arkit-gai-shu.md)
 * [ARKit 概述](arkit-gai-shu-1.md)
 * [Hello AR World](hello-ar-world.md)
 * [自定义模型](zi-ding-yi-mo-xing.md)
