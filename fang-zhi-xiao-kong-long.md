@@ -12,7 +12,7 @@
 
 https://www.jianshu.com/p/a3d1c48f0d43
 
-## Hit Test
+## 命中测试
 
 ## 应用物理学
 
