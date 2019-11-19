@@ -132,17 +132,17 @@ func makeVideoNode(size:CGSize ) -> SCNNode?{
 
 ### 小动画
 
-https://www.raywenderlich.com/6957-building-a-museum-app-with-arkit-2\#toc-anchor-015
+{% embed url="https://www.raywenderlich.com/6957-building-a-museum-app-with-arkit-2\#toc-anchor-015" %}
 
-[https://www.jianshu.com/p/dfe33efbdc11](https://www.jianshu.com/p/dfe33efbdc11)
 
-https://developer.apple.com/documentation/arkit/detecting\_images\_in\_an\_ar\_experience
 
-## 导入参考图像
+{% embed url="https://www.jianshu.com/p/dfe33efbdc11" %}
 
-## 配置图像跟踪
 
-## 可视化检测到的图像
 
-## 显示信息
+{% embed url="https://developer.apple.com/documentation/arkit/detecting\_images\_in\_an\_ar\_experience" %}
+
+
+
+
 
