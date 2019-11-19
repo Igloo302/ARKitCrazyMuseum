@@ -6,6 +6,8 @@
 
 AR具备三个主要特点：虚实结合，实时交互和三维注册（计算机生成的虚拟物体和真实的环境空间上对应，设备移动的时候，虚拟物体还可以位置正确的对准关系）。
 
+目前，AR的应用场景正在不断拓展，在娱乐互动、智能营销、智能设备、景区行业、交互行业、汽车行业业已应用，艺术家甚至开始[用AR进行创作](https://www.apple.com/today/feature/augmentedrealities/?mnid=s7pA29YxT-dc_mtid_1870765e38482_pcrid_375854188485_pgrid_78554185882_&cid=aos-us-kwgo--brand-today-art--slid---product-&mtid=1870765e38482&aosid=p238&AnonymizeIP=set)。
+
 种种迹象表明，和微软一样，Apple把对未来的期待放在AR而非VR上，据报道，Apple CEO Tim Cook多次表示看好AR的未来。他在一次[电视采访](https://www.androidpit.com/tim-cook-a-life-without-ar-unimaginable)上说：
 
 > In a few years, we are not going to be able to imagine our lives without AR. It's that profound a platform.
@@ -44,23 +46,22 @@ ARKit是Apple公司在2017年9月的全球开发者大会上推出的软件开�
 
 ## 工作原理及流程
 
-https://blog.csdn.net/u013263917/article/details/72903174
+下图是Apple在其Apple Park的访客中心供游客使用的[AR应用](https://9to5mac.com/2017/11/17/hands-on-with-apple-park-visitor-centers-ar-campus-experience-video/)。该应用程序将树叶，照明效果和建筑物细节叠加到实物模型上，访问者在AR世界中可以一览整个园区，查看一天的光线变化，甚至可以看到建筑的内部。
 
-一个简单的AR场景实现所需要的技术和实现步骤如下：
+![Photo by Patrick Schneider on Unsplash](.gitbook/assets/patrick-schneider-87oz2sov9ug-unsplash.jpg)
 
-1. 多媒体捕捉现实图像：如摄像头
-2. 三维建模:3D立体模型
-3. 传感器追踪:主要追踪现实世界动态物体的六轴变化，这六轴分别是X、Y、Z轴位移及旋转。其中位移三轴决定物体的方位和大小，旋转三周决定物体显示的区域。
-4. 坐标识别及转换：3D模型显示在现实图像中不是单纯的frame坐标点，而是一个三维的矩阵坐标。这基本上也是学习AR最难的部分，好在ARKit帮助我们大大简化了这一过程。
-5. 除此之外，AR还可以与虚拟物体进行一些交互。
 
-![](.gitbook/assets/4.png)
 
-另外让开发者们惊喜的就是ARKit对 Unity3D和Unreal也是全线支持。我们来看看ARKit的架构图：
+将真实世界和虚拟物体结合在一起，一个简单的AR系统的基本组成部分和需要的技术有：
 
-![](.gitbook/assets/5.png)
+1. 捕捉真实世界：如摄像头
+2. 世界追踪：实时获取设备（手机）的位置姿态变化，追踪还包括人脸、图像、物体的追踪。
+3. 场景理解：手机通过一系列的软件算法来分析相机图像，“理解“空间中水平面、垂直面以便在场景中放置物体，场景理解还包括理解环境中的光照环境，以便在虚拟场景中精确模拟真实的光照，以防物体看起来过亮或过暗。
+4. 虚拟模型三维建模：3D立体建模
+5. 虚拟物体和现实世界结合：将虚拟物体渲染到捕捉的真实世界中
+6. 此外，还可以和虚拟物体进行交互，如拖动、旋转模型。
 
-[https://blog.csdn.net/xiangzhihong8/article/details/77770485](https://blog.csdn.net/xiangzhihong8/article/details/77770485)
+![ARKit&#x67B6;&#x6784;&#x56FE;](.gitbook/assets/5.png)
 
 ### 核心类
 
@@ -68,11 +69,19 @@ https://www.jianshu.com/p/d0721aabcbf7
 
 AR工程中有一个ARSCNView，它用来加载3D模型的AR视图的，它继承于SCNView，相对的加载2D视图的就是ARSKView。
 
-SpriteKit是用来创建2D模型，在游戏开发中，指的是以图像方式呈现在屏幕上的一个图像。这个图像也许可以移动，用户可以与其交互，也有可能仅只是游戏的一个静止的背景图。而在AR中，2D模型会随着手机的远近放大缩小，而不能像3D模型那样可以从侧面观察。
+
 
 ![](.gitbook/assets/6.png)
 
 SCeneKit结构图
 
 ## 学习资源
+
+{% embed url="https://blog.csdn.net/u013263917/article/details/72903174" %}
+
+{% embed url="https://juejin.im/entry/5996517b6fb9a0248228a112" %}
+
+{% embed url="https://juejin.im/post/5b2349aee51d4558842a9a0b" %}
+
+
 
