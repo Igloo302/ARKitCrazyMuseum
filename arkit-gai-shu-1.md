@@ -63,17 +63,5 @@ ARKit是Apple公司在2017年9月的全球开发者大会上推出的软件开�
 
 ![ARKit&#x67B6;&#x6784;&#x56FE;](.gitbook/assets/5.png)
 
-## 学习资源
-
-{% embed url="https://github.com/miliPolo/Amazing-ARkit" %}
-
-{% embed url="https://www.appcoda.com/arkit-introduction-scenekit/" %}
-
-{% embed url="https://blog.csdn.net/u013263917/article/details/72903174" %}
-
-{% embed url="https://juejin.im/entry/5996517b6fb9a0248228a112" %}
-
-{% embed url="https://juejin.im/post/5b2349aee51d4558842a9a0b" %}
-
 
 
