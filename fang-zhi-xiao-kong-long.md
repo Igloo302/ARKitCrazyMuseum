@@ -118,9 +118,9 @@ func addDinosaur(x:Float = -0.2, y: Float = 0, z:Float = -0.2){
 planeNode.physicsBody = SCNPhysicsBody(type: .kinematic, shape: SCNPhysicsShape(geometry: plane, options: nil))
 ```
 
-再运行App，就可以看到小恐龙不是凭空出现，而是从上方掉落下来的，而且还带有物理的碰撞效果。
-
-## 参考资料
-
 {% embed url="https://www.jianshu.com/p/641af448830c" %}
+
+
+
+## 渲染和光照估计
 

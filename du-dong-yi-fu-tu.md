@@ -8,11 +8,11 @@
 
 一个基本的图像跟踪流程非常简单：
 
-1. 创建参考图
+1. 创建参考图，也就是被识别的图片
 2. 将参考图放在资源目录的AR Resources组中
 3. 设置ARKit会话，其中图像检测
 4. 在会话配置中加载参考图
-5. 启动ARKit会话
+5. 启动识别图像的ARKit会话
 6. 识别到图像时添加锚点并回调
 7. 将想要的虚拟模型添加到场景中或执行其他操作
 
@@ -42,19 +42,21 @@
 
 ## 配置图像跟踪
 
+在viewWillAppear\(\_:\) 中，添加一个新的常量了设置参考图像，这将使用您刚刚在资源目录中创建的`AR Images`组中的图像创建`ARReferenceImage`集
+
 ```swift
-override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    // 设置参考图像
-    guard let referenceImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil) else {
+guard let referenceImages = ARReferenceImage.referenceImages(
+        inGroupNamed: "AR Resources", bundle: nil) else {
         fatalError("Missing expected asset catalog resources.")
     }
-    // Create a session configuration
-    let configuration = ARWorldTrackingConfiguration()
-    configuration.detectionImages = referenceImages
-    // Run the view's session
-    sceneView.session.run(configuration)
-}
+```
+
+然后，将配置`configuration`更改为`ARWorldTrackingConfiguration()` ，然后将`referenceImages`添加到配置中。
+
+```swift
+// Create a session configuration
+let configuration = ARWorldTrackingConfiguration()
+configuration.detectionImages = referenceImages
 ```
 
 ## 可视化检测到的图像
