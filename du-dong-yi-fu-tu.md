@@ -42,7 +42,7 @@
 
 ## 配置图像跟踪
 
-在`viewWillAppear(_:)` 中，添加一个新的常量了设置参考图像，这将使用您刚刚在资源目录中创建的`AR Images`组中的图像创建`ARReferenceImage`集。
+在`viewWillAppear(_:)` 中，添加一个新的常量`referenceImages`设置参考图像，这将使用您刚刚在资源目录中创建的`AR Images`组中的图像创建`ARReferenceImage`集。
 
 ```swift
 guard let referenceImages = ARReferenceImage.referenceImages(
@@ -51,7 +51,7 @@ guard let referenceImages = ARReferenceImage.referenceImages(
     }
 ```
 
-然后，将配置`configuration`更改为`ARWorldTrackingConfiguration()` ，然后将`referenceImages`添加到配置中。
+然后，将配置`configuration`更改为`ARWorldTrackingConfiguration()` ，然后将`referenceImages`添加到配置中，这个会话就能寻找环境中的参考图像了。
 
 ```swift
 // Create a session configuration
@@ -59,9 +59,9 @@ let configuration = ARWorldTrackingConfiguration()
 configuration.detectionImages = referenceImages
 ```
 
-## 可视化检测到的图像
+## 可视化图像
 
-和检测平面相似，当图像被检测到的时候，ARSession会添加ARImageAnchor，并且调用renderer\(\_:didAdd:for:\)方法，代码如下：
+和检测平面相似，当图像被检测到的时候，`ARSession`会添加`ARImageAnchor`，并且调用`renderer(_:didAdd:for:)`方法，`imageAnchor.referenceImage`拥有识别到的图片的物理实际尺寸，可以创建一个和图片的实际尺寸相同大小的虚拟半透明的长方形，就能让我们在AR中看到检测的效果。代码如下：
 
 ```swift
 func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
@@ -81,14 +81,11 @@ func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: AR
     // Add the plane visualization to the scene.
     node.addChildNode(planeNode)
 }
-
 ```
 
 ![](.gitbook/assets/29.png)
 
-在检测到的图片上显示半透明长方形
-
-再给这个半透明的长方形添加一个高亮动画，长方形就会在高亮后消失
+在检测到的图片上显示半透明长方形之后，我们可以再给这个半透明的长方形添加一个高亮动画，长方形就会在高亮后消失。
 
 ```swift
 // 高亮动画
@@ -104,24 +101,46 @@ var imageHighlightAction: SCNAction {
 }
 ```
 
-在renderer\(\_:didAdd:for:\)方法进行调用
+在`renderer(_:didAdd:for:)`方法进行调用即可。
 
 ```swift
 // 显示高亮动画
 planeNode.runAction(self.imageHighlightAction)
 ```
 
-### 显示信息
+## 显示信息
 
-### 显示图片
+我们现在已经能够识别图片了，接下来，我们基于识别到的图片去显示更多的信息。
 
-### 播放视频
+博物馆只能挂上一副静态的图片，通过AR，我们就能看到更多的相关图片，甚至让图片动起来。显示图片这时候就非常简单了，把上文中显示半透明长方形的代码稍作修改，并创建`makeImageNode()`方法，代码如下：
 
-![](.gitbook/assets/30.png)
+```swift
+func makeImageNode(size:CGSize,name: String = "noPhoto")-> SCNNode?{
+    // 根据识别到的图片名从资源包中抓取对应的图片
+    guard let img = UIImage(named: name + "_AR") else {return nil}
+    let material = SCNMaterial()
+    material.diffuse.contents = img
+    material.lightingModel = .physicallyBased
+    
+    let imgPlane = SCNPlane(width: size.width, height: size.height)
+    imgPlane.materials = [material]
+    
+    // 创建将成为场景一部分的实际节点
+    let imgNode = SCNNode(geometry: imgPlane)
+    
+    // 绕x轴旋转90度
+    imgNode.eulerAngles.x = -.pi / 2
+    
+    // 移动位置
+    imgNode.position.x = imgNode.position.x - Float(size.width)
+    
+    return imgNode
+}
+```
 
-Video by Engin Akyurt from Pexels
+显示视频的方法也是类似的，参考第三节“自定义模型“，将Tyrannosaurus.mp4导入到项目中，创建函数makeVideoNode\(\)创建生成包含视频的Node。
 
-将Tyrannosaurus.mp4导入到项目中，创建函数makeVideoNode\(\)创建生成包含视频的Node
+![Video by Engin Akyurt from Pexels](.gitbook/assets/30.png)
 
 ```swift
 func makeVideoNode(size:CGSize ) -> SCNNode?{
@@ -139,12 +158,11 @@ func makeVideoNode(size:CGSize ) -> SCNNode?{
             avPlayer.seek(to: .zero)
             avPlayer.play()
 }
-
 ```
 
-### 显示文字
+编译运行，就能够出现图中的效果。
 
-### 小动画
+![](.gitbook/assets/image%20%286%29.png)
 
 ## 参考资料
 
