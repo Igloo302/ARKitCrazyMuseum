@@ -42,7 +42,7 @@
 
 ## 配置图像跟踪
 
-在`viewWillAppear(_:)` 中，添加一个新的常量`referenceImages`设置参考图像，这将使用您刚刚在资源目录中创建的`AR Images`组中的图像创建`ARReferenceImage`集。
+在`viewWillAppear(_:)` 中，添加一个新的常量`referenceImages`设置参考图像，这将使用您刚刚在资源目录中创建的`AR Images`组中的图像创建`ARReferenceImage`集。注意，图像检测的资源组最多只能支持25个图像，所以如果图片超过25个，需要创建多个资源组，在程序内进行切换。
 
 ```swift
 guard let referenceImages = ARReferenceImage.referenceImages(
@@ -61,7 +61,9 @@ configuration.detectionImages = referenceImages
 
 ## 可视化图像
 
-和检测平面相似，当图像被检测到的时候，`ARSession`会添加`ARImageAnchor`，并且调用`renderer(_:didAdd:for:)`方法，`imageAnchor.referenceImage`拥有识别到的图片的物理实际尺寸，可以创建一个和图片的实际尺寸相同大小的虚拟半透明的长方形，就能让我们在AR中看到检测的效果。代码如下：
+和检测平面相似，当图像被检测到的时候，`ARSession`会添加`ARImageAnchor`，并且获得回调`renderer(_:didAdd:for:)`。`imageAnchor.referenceImage`拥有识别到的图片的物理实际尺寸，可以创建一个和图片的实际尺寸相同大小的虚拟半透明的长方形，就能让我们在AR中看到检测的效果。
+
+最终`renderer(_:didAdd:for:)`代码如下：
 
 ```swift
 func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
@@ -160,7 +162,7 @@ func makeVideoNode(size:CGSize ) -> SCNNode?{
 }
 ```
 
-编译运行，就能够出现图中的效果。
+你还可以根据自己的想法添加文字、三维模型甚至是声音等信息。编译运行，打印出参考图像，或者像笔者一样用电脑显示参考图像，将其放置在光线充足的环境中，识别成功后就能够出现图中的效果。
 
 ![](.gitbook/assets/image%20%286%29.png)
 
