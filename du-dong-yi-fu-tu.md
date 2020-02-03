@@ -4,7 +4,7 @@
 
 在之前的课程中，我们已经学习了在环境中检测平面，并将模型放置在平面上，这也是一种常见的放置模型的方式，适用于很多AR游戏的场景布置。
 
-在本节中，我们将继续学习另一种常见的放置虚拟场景的方式：以特定的图片为参考物建立坐标，在图像上叠加信息。例如，当用户识别一张图画，博物馆应用可以显示虚拟策展人，而当玩家将设备指向棋盘时，可以在棋盘上显示虚拟棋子。
+在本节中，我们将继续学习另一种常见的放置虚拟场景的方式：以特定的图片为参考物建立坐标，在图像上叠加信息。这种AR技术可以用于各种有趣的应用，例如，当用户识别一张图画，博物馆应用可以显示虚拟策展人，而当玩家将设备指向棋盘时，可以在棋盘上显示虚拟棋子。
 
 一个基本的图像跟踪流程非常简单：
 
@@ -38,11 +38,11 @@
 
 ![warning: Ambiguous Content: AR reference image &#x201C;Pterosaur&#x201D;: The histogram of the image is narrow or not well distributed. Recognition works better on images with wider, flatter histograms.](.gitbook/assets/28.png)
 
-现在，是时候继续编写代码来识别这些图像了。
+现在，是时候继续编写代码来“操作“这些图像了。
 
 ## 配置图像跟踪
 
-在viewWillAppear\(\_:\) 中，添加一个新的常量了设置参考图像，这将使用您刚刚在资源目录中创建的`AR Images`组中的图像创建`ARReferenceImage`集
+在`viewWillAppear(_:)` 中，添加一个新的常量了设置参考图像，这将使用您刚刚在资源目录中创建的`AR Images`组中的图像创建`ARReferenceImage`集。
 
 ```swift
 guard let referenceImages = ARReferenceImage.referenceImages(
@@ -63,7 +63,7 @@ configuration.detectionImages = referenceImages
 
 和检测平面相似，当图像被检测到的时候，ARSession会添加ARImageAnchor，并且调用renderer\(\_:didAdd:for:\)方法，代码如下：
 
-```text
+```swift
 func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
     // 获取锚点对应的图片
     guard let imageAnchor = anchor as? ARImageAnchor else { return }
@@ -90,7 +90,7 @@ func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: AR
 
 再给这个半透明的长方形添加一个高亮动画，长方形就会在高亮后消失
 
-```text
+```swift
 // 高亮动画
 var imageHighlightAction: SCNAction {
     return .sequence([
@@ -106,7 +106,7 @@ var imageHighlightAction: SCNAction {
 
 在renderer\(\_:didAdd:for:\)方法进行调用
 
-```text
+```swift
 // 显示高亮动画
 planeNode.runAction(self.imageHighlightAction)
 ```
