@@ -22,7 +22,7 @@
 
 ARKit 中的坐标单位为米，这个函数的功能就是创建一个边长为0.1米的立方体`SCNBox`，将其添加到名为`boxNode`的节点中，然后将其设置为`sceneView`的子节点。ARKit 和 SceneKit 的坐标系如下图所示，ARSession 开始时，摄像头 position 被初始化为 X=0, Y=0, Z=0，第6行将`boxNode`的位置定义为`(0.2, 0, -0.2)`则将box置于摄像头左前方。
 
-![](.gitbook/assets/image%20%2810%29.png)
+![](.gitbook/assets/image%20%2811%29.png)
 
 在`viewDidLoad()`方法中调用`addbox()`后运行应用，就可以看见悬浮在空中的3D立方体，移动摄像头这个立方体的位置可以保持
 
@@ -35,7 +35,7 @@ sceneView.autoenablesDefaultLighting = true
 
 除了长方体，SCNGeometry还有多种类型，那如何知道其他的类型是什么，怎么创建呢？按住键盘上的option键，鼠标移到代码中的`SCNBox`，鼠标将变成问号。这就是Xcode的内联帮助，它可帮开发者快速学习类或代码片段的用法。在变量、类、或者方法名上执行Option + Left-click操作来获得更多细节信息。假使你点击了弹出视图底部的参考链接，那么就可以方便地跳转到Xcode提供的文档中。你还可以在变量、类或者方法名上执行Option+双击名称操作，从而更方便地跳转至文档。
 
-![](.gitbook/assets/image%20%281%29.png)
+![](.gitbook/assets/image%20%282%29.png)
 
 查看文档可以看到，SCNBox继承于SCNGeometry，在后者详情页中就可以看到创建各种几何图形的方法了，试试创建一个球体吧。
 
@@ -62,7 +62,7 @@ textNode.pivot = SCNMatrix4MakeTranslation(min.x + 0.5 * (max.x - min.x), min.y,
 
 但是这个时候可以发现，字体的边缘似乎不太平滑。
 
-![](.gitbook/assets/image%20%2817%29.png)
+![](.gitbook/assets/image%20%2819%29.png)
 
 这个问题的[解决方案](https://medium.com/s23nyc-tech/arkit-planes-3d-text-and-hit-detection-1e10335493d)是，首先将SCNText的尺寸创建为1米，再SCNNode缩放为0.1。
 
@@ -166,7 +166,7 @@ func playVideo(x:Float = 0, y: Float = 0, z:Float = -0.2){
 
 用建模软件Rhinoceros新建一个带贴图的图形，注意无论在Rhinoceros中设置什么单位，导出后都将被视作以米为单位。导出COLLADA\(dae\)格式，并勾选Save textures选项，得到模型的dae文件和png格式的贴图文件。
 
-![](.gitbook/assets/image%20%285%29.png)
+![](.gitbook/assets/image%20%286%29.png)
 
 #### 网络上下载模型
 
@@ -178,7 +178,7 @@ func playVideo(x:Float = 0, y: Float = 0, z:Float = -0.2){
 
 在ARKitDemo的根目录下新建一个以scnassets为后缀的文件夹，取名art.scnassets，将先前得到的dea文件和存有贴图的文件夹放入art.scnassets目录，就能在Xcode中查看这个模型了，贴图能被正确加载，右侧的属性栏中可以查看模型的大小、贴图等。
 
-![](.gitbook/assets/image%20%289%29.png)
+![](.gitbook/assets/image%20%2810%29.png)
 
 代码部分，在`ViewController`类中新建方法，并在`viewDidLoad()`调用。
 
@@ -199,7 +199,7 @@ func playVideo(x:Float = 0, y: Float = 0, z:Float = -0.2){
 
 实现思路是实例化一个`SCNReferenceNode`，用来加载dae文件中的内容。运行后效果
 
-![](.gitbook/assets/image%20%284%29.png)
+![](.gitbook/assets/image%20%285%29.png)
 
 除了`SCNReferenceNode`方法以外，还有一种方法可以将dae模型导入到ARKit。通过新建一个SCNNode对象，用来附着模型子节点。当模型中存在多个节点时，添加for语句，遍历所有子节点，加入到一个SCNNode对象中，具体实现代码如下：
 
