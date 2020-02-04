@@ -1,10 +1,12 @@
 # 化石修复术
 
-对象识别和图像识别功能的工作方式和流程基本是一致的，主要区别在于App识别的是三维物体而非平面图像，所以首先需要创建想要识别对象的参考。
-
 ## 创建参考对象
 
-[https://developer.apple.com/documentation/arkit/scanning\_and\_detecting\_3d\_objects](https://developer.apple.com/documentation/arkit/scanning_and_detecting_3d_objects)
+从开发的角度来看，对象识别和图像识别功能的工作方式和流程基本是一致的，主要区别在于识别的是三维物体而非平面图像，设置对象检测稍微复杂一些，对象引用创建也更复杂一些。
+
+首先需要创建想要识别对象的参考信息，在图像检测中，我们可以创建、拍摄、扫描二维的图像，而对于3D的物体，参考的创建会更麻烦。ARKit提供了自己的API帮助我们仅仅使用iPhone就能完成参考对象的创建，Apple提供了所需的App
+
+
 
 ![](.gitbook/assets/32.png)![](.gitbook/assets/33.png)![](.gitbook/assets/34.png)
 
@@ -61,8 +63,17 @@ textNode.constraints = [billboardConstraints]
 ```swift
 // 播放声音
 node.addAudioPlayer(SCNAudioPlayer(source: SCNAudioSource(fileNamed: "growls.wav")!))
-
 ```
 
-## 
+## 参考资料
+
+{% embed url="https://developer.apple.com/documentation/arkit/scanning\_and\_detecting\_3d\_objects" %}
+
+{% embed url="https://www.raywenderlich.com/6957-building-a-museum-app-with-arkit-2\#toc-anchor-015" %}
+
+{% embed url="https://www.jianshu.com/p/dfe33efbdc11" %}
+
+{% embed url="https://developer.apple.com/documentation/arkit/detecting\_images\_in\_an\_ar\_experience" %}
+
+
 
