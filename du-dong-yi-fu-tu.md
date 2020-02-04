@@ -140,6 +140,8 @@ func makeImageNode(size:CGSize,name: String = "noPhoto")-> SCNNode?{
 }
 ```
 
+这将创建一个带有图片名称的3D文本节点。 `SCNText`是描述字符串形状的几何体。 它允许您创建可放置在场景中的形状。 
+
 显示视频的方法也是类似的，参考第三节“自定义模型“，将Tyrannosaurus.mp4导入到项目中，创建函数makeVideoNode\(\)创建生成包含视频的Node。
 
 ![Video by Engin Akyurt from Pexels](.gitbook/assets/30.png)
@@ -164,7 +166,7 @@ func makeVideoNode(size:CGSize ) -> SCNNode?{
 
 你还可以根据自己的想法添加文字、三维模型甚至是声音等信息。编译运行，打印出参考图像，或者像笔者一样用电脑显示参考图像，将其放置在光线充足的环境中，识别成功后就能够出现图中的效果。
 
-![](.gitbook/assets/image%20%286%29.png)
+![](.gitbook/assets/image%20%288%29.png)
 
 ## 参考资料
 

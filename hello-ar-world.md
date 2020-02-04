@@ -10,15 +10,15 @@ ARKit框架中的视图对象继承于UIView，本身只包括相机追踪，并
 
 回到我们的教程，填上必要的项目信息，可以看到，ARKit框架提供了四种AR技术，SceneKit是基于3D场景实现的增强现实，SpriktKit是基于2D场景实现的增强现实。在Content Technology 选择 “SceneKit”。
 
-![](.gitbook/assets/image%20%281%29.png)
+![](.gitbook/assets/image%20%283%29.png)
 
 稍等片刻，Xcode会自动为我们生成一段简单的AR代码，在Xcode左上方区域1处选择连接的iOS设备，然后点击2处Run，应用即会进行安装。
 
-![](.gitbook/assets/image%20%2811%29.png)
+![](.gitbook/assets/image%20%2813%29.png)
 
 打开HelloARWorld应用并允许摄像头权限，就能从摄像头画面中看到一架飞机的 3D 模型，你可以全方位地查看它，同时，无论你如何移动手机，这架飞机都不会移动它的位置，
 
-![HelloARWorld&#x4F8B;&#x7A0B;](.gitbook/assets/image%20%2810%29.png)
+![HelloARWorld&#x4F8B;&#x7A0B;](.gitbook/assets/image%20%2812%29.png)
 
 我们先来看一看这个App的核心代码ViewController.swift。
 
@@ -77,13 +77,13 @@ SpriteKit是用来创建2D模型，2D模型会根据手机的远近放大缩小�
 
 打开Xcode，点击File &gt; New &gt; Project…，选择Single View App，点击Next创建项目，命名为ARKitDemo。如下图操作所示：
 
-![&#x521B;&#x5EFA;&#x9879;&#x76EE;](.gitbook/assets/image%20%285%29.png)
+![&#x521B;&#x5EFA;&#x9879;&#x76EE;](.gitbook/assets/image%20%287%29.png)
 
 ### 设置SceneKit View
 
 打开Main.storyboard，点击右上方的添加按钮，将`ARKit SceneKit View`拖放到视图控制器上，并设置好约束，让`ARKit SceneKit View`充满全屏。
 
-![&#x8BBE;&#x7F6E;SceneKit View](.gitbook/assets/image%20%2816%29.png)
+![&#x8BBE;&#x7F6E;SceneKit View](.gitbook/assets/image%20%2818%29.png)
 
 ### 连接IBOutlet
 
@@ -93,7 +93,7 @@ SpriteKit是用来创建2D模型，2D模型会根据手机的远近放大缩小�
 import ARKit
 ```
 
-![&#x8FDE;&#x63A5;IBOutlet](.gitbook/assets/image%20%2813%29.png)
+![&#x8FDE;&#x63A5;IBOutlet](.gitbook/assets/image%20%2815%29.png)
 
 然后按住control键并从ARKit SceneKit视图拖拽到ViewController.swift文件。命名为sceneView。
 
@@ -126,7 +126,7 @@ import ARKit
 
 iOS要求所有涉及隐私的功能都需要用户确认，AR所必须的摄像头也不例外。打开项目设置中的Info页，右键单击空白区域，然后选择`Add row`。将密钥设置为`Privacy - Camera Usage Description`_。_将`value`设置为对用户的提示语_。_
 
-![&#x76F8;&#x673A;&#x6743;&#x9650;](.gitbook/assets/image%20%289%29.png)
+![&#x76F8;&#x673A;&#x6743;&#x9650;](.gitbook/assets/image%20%2811%29.png)
 
 至此，一个ARKit应用就创建好了，是不是很简单？
 
