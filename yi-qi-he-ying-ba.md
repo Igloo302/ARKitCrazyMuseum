@@ -14,11 +14,19 @@
 * iOS 11.0或更高版本。
 * Xcode 10.0或更高版本。
 
-## 使用前置摄像头
+## 追踪人脸
+
+打开上一节的项目，如果您使用的设备已经更新到了iOS 13，那只需要增加几行代码，就能启动人脸追踪了。
+
+```swift
+if ARFaceTrackingConfiguration.isSupported {
+    configuration.userFaceTrackingEnabled = true
+}
+```
+
+`userFaceTrackingEnabled`是iOS 13最新支持的一个标志，用于确定ARKit是否在世界跟踪会话`ARWorldTrackingConfiguration()`中跟踪用户的面部。在提供需要面部跟踪AR会话的功能之前，需要检查`ARFaceTrackingConfiguration.isSupported`类的属性，以确定当前设备是否支持ARKit面部跟踪。
 
 
-
-## 识别人脸
 
 ## 拍照按钮
 
