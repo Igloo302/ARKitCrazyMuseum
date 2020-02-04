@@ -70,20 +70,20 @@ if let textNode = makeTextNode(size: CGSize(width: CGFloat(size.x), height: CGFl
 }
 ```
 
-为了
-
-`billboardConstraints`相关的代码可以让文字始终朝向摄像头的方向。
+`billboardConstraints`相关的代码可以让文字始终朝向摄像头的方向。此处指定的`position`将文本对齐在对象的中心上方。 因为对象的大小可能因对象而异，所以需要根据每个物体的物体大小`referenceObject.extent`属性指定。
 
 ![&#x663E;&#x793A;&#x6587;&#x5B57;](.gitbook/assets/36.png)
 
 ### 添加声音
 
-在crazyObject（\_：\_ :\)添加一行
+当扫描到霸王龙的骨骼的时候，如何播放恐龙的吼叫声？只需要一行代码就能完成这个操作。在`crazyObject（_:_:)`添加一行，这将创建一个`SCNAudioSource`，它保存用于`SceneKit`的声音数据。 此数据从包含的声音文件加载。这样就可以在刚刚创建的文字Node上绑定这个声音。
 
 ```swift
 // 播放声音
 node.addAudioPlayer(SCNAudioPlayer(source: SCNAudioSource(fileNamed: "growls.wav")!))
 ```
+
+一旦识别出来，可怕的音频就会开始播放。 为了获得最佳体验，戴上耳机。 当您在物体周围走动时，您应该听到声音的方向的响度会根据你的移动而变化。
 
 ## 参考资料
 
