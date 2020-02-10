@@ -22,7 +22,7 @@
 
 ARKit 中的坐标单位为米，这个函数的功能就是创建一个边长为0.1米的立方体`SCNBox`，将其添加到名为`boxNode`的节点中，然后将其设置为`sceneView`的子节点。ARKit 和 SceneKit 的坐标系如下图所示，ARSession 开始时，摄像头 position 被初始化为 X=0, Y=0, Z=0，第6行将`boxNode`的位置定义为`(0.2, 0, -0.2)`则将box置于摄像头左前方。
 
-![](.gitbook/assets/image%20%2812%29.png)
+![](.gitbook/assets/image%20%2813%29.png)
 
 在`viewDidLoad()`方法中调用`addbox()`后运行应用，就可以看见悬浮在空中的3D立方体，移动摄像头这个立方体的位置可以保持
 
@@ -62,7 +62,7 @@ textNode.pivot = SCNMatrix4MakeTranslation(min.x + 0.5 * (max.x - min.x), min.y,
 
 但是这个时候可以发现，字体的边缘似乎不太平滑。
 
-![](.gitbook/assets/image%20%2820%29.png)
+![](.gitbook/assets/image%20%2823%29.png)
 
 这个问题的[解决方案](https://medium.com/s23nyc-tech/arkit-planes-3d-text-and-hit-detection-1e10335493d)是，首先将SCNText的尺寸创建为1米，再SCNNode缩放为0.1。
 
@@ -166,7 +166,7 @@ func playVideo(x:Float = 0, y: Float = 0, z:Float = -0.2){
 
 用建模软件Rhinoceros新建一个带贴图的图形，注意无论在Rhinoceros中设置什么单位，导出后都将被视作以米为单位。导出COLLADA\(dae\)格式，并勾选Save textures选项，得到模型的dae文件和png格式的贴图文件。
 
-![](.gitbook/assets/image%20%287%29.png)
+![](.gitbook/assets/image%20%288%29.png)
 
 #### 网络上下载模型
 
@@ -178,7 +178,7 @@ func playVideo(x:Float = 0, y: Float = 0, z:Float = -0.2){
 
 在ARKitDemo的根目录下新建一个以scnassets为后缀的文件夹，取名art.scnassets，将先前得到的dea文件和存有贴图的文件夹放入art.scnassets目录，就能在Xcode中查看这个模型了，贴图能被正确加载，右侧的属性栏中可以查看模型的大小、贴图等。
 
-![](.gitbook/assets/image%20%2811%29.png)
+![](.gitbook/assets/image%20%2812%29.png)
 
 代码部分，在`ViewController`类中新建方法，并在`viewDidLoad()`调用。
 
