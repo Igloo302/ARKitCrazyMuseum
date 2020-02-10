@@ -26,9 +26,15 @@ if ARFaceTrackingConfiguration.isSupported {
 
 `userFaceTrackingEnabled`是iOS 13最新支持的一个标志，用于确定ARKit是否在世界跟踪会话`ARWorldTrackingConfiguration()`中跟踪用户的面部。在提供需要面部跟踪AR会话的功能之前，需要检查`ARFaceTrackingConfiguration.isSupported`类的属性，以确定当前设备是否支持ARKit面部跟踪。
 
-
-
 ## 拍照按钮
+
+如何把有趣的一幕永存？让我们在App中实现拍照的功能吧。
+
+在Xcode的左侧项目目录中点击`Main.storyboard` 出现如下界面：
+
+
+
+
 
 ## 参考资料
 
