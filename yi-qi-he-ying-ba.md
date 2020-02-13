@@ -36,15 +36,53 @@ guard ARFaceTrackingConfiguration.isSupported else { return }
 ```
 
 当我们启用 `lightEstimationEnabled` 设置时，`ARFaceTrackingConfiguration` 会把检测到的面部作为光探针，来估算出当前环境光的照射方向和亮度信息。  
+`ARFaceTrackingConfiguration`启动后，前置摄像头已经开启并实时检测/追踪人脸信息。当检测到人脸之后，我们可以通过delegate更新`ARFaceAnchor`的方法来同步更新我们自定义的3D模型。
 
+学习过前面的课程，在面部上绘制一些简单的模型并没有太大的困难：
 
+```swift
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        
+        guard anchor is ARFaceAnchor else { return }
+        
+        let box = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0)
+        let boxNode = SCNNode(geometry: box)
+        node.addChildNode(boxNode)
+    }
+```
 
+如前文所说，ARKit 以 `ARFaceGeometry` 格式提供面部三角网格，利用这个面部网格，我们可以创建一个面部几何体，在上面附加材质实现类似于京剧脸谱的效果。
 
+```swift
+    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
+        guard let sceneView = renderer as? ARSCNView,
+            anchor is ARFaceAnchor else { return nil }
+        
+        let faceGeometry = ARSCNFaceGeometry(device: sceneView.device!)!
+        let material = faceGeometry.firstMaterial!
+        
+        material.diffuse.contents = #imageLiteral(resourceName: "texture.png") // 纹理图片
+        material.lightingModel = .physicallyBased
+        
+        let contentNode = SCNNode(geometry: faceGeometry)
+        
+        return contentNode
+    }
+```
 
+人脸在摄像头中不断发生着变化，所以我们需要实时地更新覆盖在人脸上的几何体，在`renderer(_:didUpdate:for:)`使用`update()`方法即可更新`faceGeometry`。
 
+```swift
+    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+        guard let faceGeometry = node.geometry as? ARSCNFaceGeometry,
+            let faceAnchor = anchor as? ARFaceAnchor
+            else { return }
+        
+        faceGeometry.update(from: faceAnchor.geometry)
+    }
+```
 
-
-另外，[官方文档](https://app.gitbook.com/@igloo/s/arkit-crazy-museum/yi-qi-he-ying-ba)中提供了几种基于人脸的ARKit使用案例可供参考。
+另外，[官方文档](https://app.gitbook.com/@igloo/s/arkit-crazy-museum/yi-qi-he-ying-ba)中提供了几种基于人脸的ARKit使用案例，包括用混合形状动画化一个人物，将3D内容放在用户脸上，使用面几何来建模用户脸部等，读者可以自己进行尝试。
 
 ## 按钮布局
 
