@@ -6,7 +6,7 @@
 
 首先需要创建想要识别对象的参考信息，在图像检测中，我们可以创建、拍摄、扫描二维的图像，而对于3D的物体，参考的创建会更麻烦。ARKit提供了自己的API帮助我们仅仅使用iPhone就能完成参考对象的创建，Apple提供了所需的[App](https://developer.apple.com/documentation/arkit/scanning_and_detecting_3d_objects)。这个应用程序可以扫描物体，并导出`.arobject`文件，然后就可以将此文件作为资产导入Xcode项目，流程如下图所示。
 
-![&#x4F7F;&#x7528;iOS&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x626B;&#x63CF;&#x73B0;&#x5B9E;&#x4E16;&#x754C;&#x5BF9;&#x8C61;](.gitbook/assets/image%20%284%29.png)
+![&#x4F7F;&#x7528;iOS&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x626B;&#x63CF;&#x73B0;&#x5B9E;&#x4E16;&#x754C;&#x5BF9;&#x8C61;](.gitbook/assets/image%20%285%29.png)
 
 在这里，我们选用可乐瓶、鼠标和一台游戏机作为我们的识别对象。经过设置应用、放置物体、定义边界框、扫描物体、调整原点和坐标轴、测试并导出的流程后（![](.gitbook/assets/32.png)![](.gitbook/assets/33.png)![](.gitbook/assets/34.png)），即可获得各个物体的`.arobject`文件。
 

@@ -2,7 +2,7 @@
 
 在之前的章节中，我们已经学习了如何进行图像追踪和对象追踪，接下来我们将学习iPhone X ARKit的强大功能：追踪和可视化人脸。人脸作为一种特殊的对象，想必大家已经想到其工作机制了。那么，第一步是创建参考人脸吗？答案是否定的。无论是男人、女人、老人还是小孩，都是一个鼻子一张嘴，两只眼睛两个耳朵，因此我们并不需要像对象追踪那样，首先拿着手机扫描自己的脸。下图是ARKit 以 `ARFaceGeometry` 格式提供面部三角网格，在识别的过程中，可以简单理解为，ARKit能调整这个三角网格的形状，贴合出现在摄像头画面中的脸。
 
-![](.gitbook/assets/image%20%2816%29.png)
+![](.gitbook/assets/image%20%2818%29.png)
 
 在本节中，我们将利用TrueDepth前置摄像头追踪人脸，并以人脸的锚点ARFaceAnchor来添加AR效果。
 
@@ -96,18 +96,18 @@ StoryBoard 的本质是一个 XML 文件，描述了若干窗体、组件、Auto
 
 从右上角的`+`打开库面板，找到Button组件，拖动到`View`界面上。在右侧的`Attributes inspector`中，可以修改Button组件的Lable、Image、Size等属性。我们删除Lable中的值，并将Image属性改为导入的图片`take.img`，效果如图：
 
-![](.gitbook/assets/image%20%2817%29.png)
+![](.gitbook/assets/image%20%2819%29.png)
 
 不同的iOS具有不同的屏幕大小和比例，因此我们需要对这个Button添加一些布局信息，也就是设定这个按钮和其他固定的元素之间的位置关系来让其适配不同的屏幕。
 
 1. 选中控件， 点击 `Align` 按钮，勾选 `Horizontalliy in Container` ，然后点击`Add Constraints`添加这个布局，相对于父视图水平居中。
 2. 然后点击 `Add New Constraints`按钮，添加 `Width` 和 `Height` 约束，都为50
 
-![](.gitbook/assets/image%20%287%29.png)
+![](.gitbook/assets/image%20%288%29.png)
 
-![](.gitbook/assets/image%20%2829%29.png)
+![](.gitbook/assets/image%20%2831%29.png)
 
-![](.gitbook/assets/image%20%2818%29.png)
+![](.gitbook/assets/image%20%2820%29.png)
 
 这样就完成了Button的大小和位置的布局。如果菜单栏上方出现警告符号，可以点击查看有哪些约束没有完成设置，读者可以自行尝试将不同形状的按钮放在不同的位置。
 
@@ -115,11 +115,11 @@ StoryBoard 的本质是一个 XML 文件，描述了若干窗体、组件、Auto
 
 此时点击编辑区域右上方的
 
-![](.gitbook/assets/image%20%2819%29.png)
+![](.gitbook/assets/image%20%2821%29.png)
 
 按钮，将视图`Main.storyboard`和代码`ViewController.swift`分左右两边显示。这时按住contorl键，拖动刚刚创建的Button到`ViewController.swift`中，设置如下图，就能创建一个按钮按下的事件`takePhoto(_:)`。
 
-![&#x521B;&#x5EFA;&#x4E8B;&#x4EF6;](.gitbook/assets/image%20%2830%29.png)
+![&#x521B;&#x5EFA;&#x4E8B;&#x4EF6;](.gitbook/assets/image%20%2832%29.png)
 
 也就是说，我们需要按钮被按下`takePhoto(_:)`的时候，获取当前画面的图片，并将其保存到手机的相册之中。首先，需要调用`ARSCNView`的`snapshot`方法，就能获取到当前`SceneView`的`UIImage`格式的画面：
 
@@ -129,7 +129,7 @@ let image = sceneView.snapshot()
 
 将`image`存储到手机的相册之中和使用摄像头一样，需要在Info.plist配置请求照片相关的描述。
 
-![](.gitbook/assets/image%20%2820%29.png)
+![](.gitbook/assets/image%20%2822%29.png)
 
 
 
