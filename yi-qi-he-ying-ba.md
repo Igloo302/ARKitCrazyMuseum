@@ -16,13 +16,26 @@
 
 ## 追踪人脸和可视化
 
-在提供需要面部跟踪AR会话的功能之前，需要检查`ARFaceTrackingConfiguration.isSupported`类的属性，以确定当前设备是否支持ARKit面部跟踪。
+重新打开一个ARKit项目。在提供需要面部跟踪AR会话的功能之前，需要检查`ARFaceTrackingConfiguration.isSupported`类的属性，以确定当前设备是否支持ARKit面部跟踪。
 
 ```swift
 guard ARFaceTrackingConfiguration.isSupported else { return }
 ```
 
-  
+和此前不同，这次我们需要使配置`ARFaceTrackingConfiguration`，顾名思义，这是针对使用TrueDepth摄像头进行人脸的追踪的配置，其他的会话启动过程大同小异，代码如下：
+
+```swift
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard ARFaceTrackingConfiguration.isSupported else { return }
+        let configuration = ARFaceTrackingConfiguration()
+        configuration.isLightEstimationEnabled = true
+        sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+    }
+```
+
+当我们启用 `lightEstimationEnabled` 设置时，`ARFaceTrackingConfiguration` 会把检测到的面部作为光探针，来估算出当前环境光的照射方向和亮度信息。  
 
 
 
