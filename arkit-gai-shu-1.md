@@ -61,5 +61,9 @@ ARKit是Apple公司在2017年9月的全球开发者大会上推出的软件开�
 5. 虚拟物体和现实世界结合：将虚拟物体渲染到捕捉的真实世界中
 6. 此外，还可以和虚拟物体进行交互，如拖动、旋转模型。
 
+在一个完整的iOS AR体验中，ARKit框架只负责使用相机捕捉现实世界图像，将真实世界画面转变为一个3D场景，这一个转变的过程主要分为两个环节：由ARCamera负责捕捉摄像头画面，由ARSession负责搭建3D场景。
+
+将虚拟物体显示在3D场景中是由SceneKit框架来完成的（还有其他的框架，此处以最常用的SceneKit为例），这个过程称之为渲染\(Rendering\)。ARSCNView继承于SceneKit框架中的SCNView，而SCNView又继承于UIKit框架中的UIView。
+
 ![ARKit&#x67B6;&#x6784;&#x56FE;](.gitbook/assets/5.png)
 
