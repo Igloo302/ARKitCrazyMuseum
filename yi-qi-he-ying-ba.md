@@ -26,7 +26,7 @@ if ARFaceTrackingConfiguration.isSupported {
 
 `userFaceTrackingEnabled`是iOS 13最新支持的一个标志，用于确定ARKit是否在世界跟踪会话`ARWorldTrackingConfiguration()`中跟踪用户的面部。在提供需要面部跟踪AR会话的功能之前，需要检查`ARFaceTrackingConfiguration.isSupported`类的属性，以确定当前设备是否支持ARKit面部跟踪。
 
-## 拍照按钮
+## 按钮布局
 
 如何把有趣的一幕永存？让我们在App中实现拍照的功能吧。
 
@@ -47,9 +47,21 @@ StoryBoard 的本质是一个 XML 文件，描述了若干窗体、组件、Auto
 
 ![](.gitbook/assets/image%20%287%29.png)
 
-![](.gitbook/assets/image%20%2827%29.png)
+![](.gitbook/assets/image%20%2828%29.png)
 
 ![](.gitbook/assets/image%20%2818%29.png)
+
+这样就完成了Button的大小和位置的布局。如果菜单栏上方出现警告符号，可以点击查看有哪些约束没有完成设置，读者可以自行尝试将不同形状的按钮放在不同的位置。
+
+## 拍张照片
+
+此时点击编辑区域右上方的
+
+![](.gitbook/assets/image%20%2819%29.png)
+
+按钮，将视图`Main.storyboard`和代码`ViewController.swift`分左右两边显示。这时按住contorl键，拖动刚刚创建的Button到`ViewController.swift`中，设置如下图，就能创建一个按钮按下的事件。
+
+![&#x521B;&#x5EFA;&#x4E8B;&#x4EF6;](.gitbook/assets/image%20%2829%29.png)
 
 
 
