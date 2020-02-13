@@ -14,17 +14,24 @@
 * iOS 11.0或更高版本。
 * Xcode 10.0或更高版本。
 
-## 追踪人脸
+## 追踪人脸和可视化
 
-打开上一节的项目，如果您使用的设备已经更新到了iOS 13，那只需要增加几行代码，就能启动人脸追踪了。
+在提供需要面部跟踪AR会话的功能之前，需要检查`ARFaceTrackingConfiguration.isSupported`类的属性，以确定当前设备是否支持ARKit面部跟踪。
 
 ```swift
-if ARFaceTrackingConfiguration.isSupported {
-    configuration.userFaceTrackingEnabled = true
-}
+guard ARFaceTrackingConfiguration.isSupported else { return }
 ```
 
-`userFaceTrackingEnabled`是iOS 13最新支持的一个标志，用于确定ARKit是否在世界跟踪会话`ARWorldTrackingConfiguration()`中跟踪用户的面部。在提供需要面部跟踪AR会话的功能之前，需要检查`ARFaceTrackingConfiguration.isSupported`类的属性，以确定当前设备是否支持ARKit面部跟踪。
+  
+
+
+
+
+
+
+
+
+另外，[官方文档](https://app.gitbook.com/@igloo/s/arkit-crazy-museum/yi-qi-he-ying-ba)中提供了几种基于人脸的ARKit使用案例可供参考。
 
 ## 按钮布局
 
