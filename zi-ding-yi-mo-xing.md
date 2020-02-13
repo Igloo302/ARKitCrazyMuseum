@@ -62,7 +62,7 @@ textNode.pivot = SCNMatrix4MakeTranslation(min.x + 0.5 * (max.x - min.x), min.y,
 
 但是这个时候可以发现，字体的边缘似乎不太平滑。
 
-![](.gitbook/assets/image%20%2823%29.png)
+![](.gitbook/assets/image%20%2825%29.png)
 
 这个问题的[解决方案](https://medium.com/s23nyc-tech/arkit-planes-3d-text-and-hit-detection-1e10335493d)是，首先将SCNText的尺寸创建为1米，再SCNNode缩放为0.1。
 

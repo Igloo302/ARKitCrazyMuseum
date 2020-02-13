@@ -47,7 +47,7 @@ StoryBoard 的本质是一个 XML 文件，描述了若干窗体、组件、Auto
 
 ![](.gitbook/assets/image%20%287%29.png)
 
-![](.gitbook/assets/image%20%2828%29.png)
+![](.gitbook/assets/image%20%2829%29.png)
 
 ![](.gitbook/assets/image%20%2818%29.png)
 
@@ -61,15 +61,51 @@ StoryBoard 的本质是一个 XML 文件，描述了若干窗体、组件、Auto
 
 按钮，将视图`Main.storyboard`和代码`ViewController.swift`分左右两边显示。这时按住contorl键，拖动刚刚创建的Button到`ViewController.swift`中，设置如下图，就能创建一个按钮按下的事件`takePhoto(_:)`。
 
-![&#x521B;&#x5EFA;&#x4E8B;&#x4EF6;](.gitbook/assets/image%20%2829%29.png)
+![&#x521B;&#x5EFA;&#x4E8B;&#x4EF6;](.gitbook/assets/image%20%2830%29.png)
+
+也就是说，我们需要按钮被按下`takePhoto(_:)`的时候，获取当前画面的图片，并将其保存到手机的相册之中。首先，需要调用`ARSCNView`的`snapshot`方法，就能获取到当前`SceneView`的`UIImage`格式的画面：
+
+```swift
+let image = sceneView.snapshot()
+```
+
+将`image`存储到手机的相册之中和使用摄像头一样，需要在Info.plist配置请求照片相关的描述。
+
+![](.gitbook/assets/image%20%2820%29.png)
 
 
+
+需要使用`UIImageWriteToSavedPhotosAlbum()`方法，最简单的写法只需要一句`UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)`，可以看到图片被保存到相机胶卷中去了。
+
+更详细的使用方法可以查阅相关文档和[教程](https://www.hackingwithswift.com/read/13/5/saving-to-the-ios-photo-library#)，在此不做赘述，最终代码如下：
+
+```swift
+    @IBAction func takePhoto(_ sender: UIButton) {
+        let image = sceneView.snapshot()
+         UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            // we got back an error!
+            let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        } else {
+            let ac = UIAlertController(title: "Saved!", message: "Your altered image has been saved to your photos.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        }
+    }
+```
 
 ## 参考资料
 
 {% embed url="https://developer.apple.com/documentation/arkit/tracking\_and\_visualizing\_faces" %}
 
 {% embed url="https://juejin.im/post/5b2349aee51d4558842a9a0b" %}
+
+{% embed url="https://www.hackingwithswift.com/read/13/5/saving-to-the-ios-photo-library\#" %}
 
 
 
