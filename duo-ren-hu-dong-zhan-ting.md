@@ -25,9 +25,11 @@
 
 ![](.gitbook/assets/img_fc337861bdd9-1.jpeg)
 
-
+除了本节从介绍的主从多用户策略，iOS 13.0以上还支持对等多用户策略，读者可以查阅这份[文档](https://developer.apple.com/documentation/arkit/creating_a_collaborative_session)学习了解。
 
 {% embed url="https://developer.apple.com/documentation/arkit/swiftshot\_creating\_a\_game\_for\_augmented\_reality" %}
+
+{% embed url="https://developer.apple.com/documentation/arkit/creating\_a\_multiuser\_ar\_experience" %}
 
 
 
