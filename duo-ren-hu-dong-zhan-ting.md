@@ -23,7 +23,7 @@
 
 首先，我们根据之前的学习创建一个通过点击屏幕放置小恐龙模型的项目。它定义了一个ARWorldTrackingConfiguration的AR会话，当UITapGestureRecognizer检测到ARSCNView上的点击时，didTap方法使用ARKit命中测试在featurePoint中查找交点，在该点处显示3D小恐龙模型。
 
-![](.gitbook/assets/img_fc337861bdd9-1.jpeg)
+![&#x914D;&#x7F6E;AR&#x4F1A;&#x8BDD;&#x548C;&#x653E;&#x7F6E;&#x865A;&#x62DF;&#x5C0F;&#x6050;&#x9F99;](.gitbook/assets/img_fc337861bdd9-1.jpeg)
 
 ## AR World Map
 
