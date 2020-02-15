@@ -166,7 +166,7 @@ func makeVideoNode(size:CGSize ) -> SCNNode?{
 
 你还可以根据自己的想法添加文字、三维模型甚至是声音等信息。编译运行，打印出参考图像，或者像笔者一样用电脑显示参考图像，将其放置在光线充足的环境中，识别成功后就能够出现图中的效果。
 
-![](.gitbook/assets/image%20%2813%29.png)
+![](.gitbook/assets/image%20%2814%29.png)
 
 ## 参考资料
 

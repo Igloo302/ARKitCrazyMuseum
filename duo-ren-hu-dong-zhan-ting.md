@@ -4,7 +4,7 @@
 
 在WWDC 2018上，Apple展示了一款增强现实游戏SwiftShot，玩法主要是利用弹弓击倒对方积木来取胜。SwiftShot最多的亮点是支持2到6名玩家同时进行弹弓射击的游戏操作，也就是说，多个玩家可以共享同一个虚拟世界。多人互动的AR游戏可以让玩家聚集在同一个空间中玩乐，旁观者通过AR观看游戏带来了全新的视角和新的体验。
 
-![SwiftShot](.gitbook/assets/image%20%2823%29.png)
+![SwiftShot](.gitbook/assets/image%20%2824%29.png)
 
 在ARKit中，这种多人互动技术称为多用户\(Multiuser\)，这也是在WWDC 2018上发布的ARKit 2.0的重点特性。当多用户被启用时，在整个会话过程中，不同设备中的信息会通过网络协议进行传输共享，除了有关物理环境布局的信息外，还包括指示用户位置的锚点，放置的虚拟内容等。
 
@@ -75,7 +75,7 @@ serviceBrowser.startBrowsingForPeers()
 
 当发现带有相同`serviceType`的设备时，将会邀请其加入共享会话。收到邀请`MCNearbyServiceAdvertiser`将通过delegate方法接受邀请。
 
-## AR World Map
+## 捕获并发送AR World Map
 
 ARWorldMap对象使用用户周围的特征点信息和现有的锚点，本身不包含经度/纬度信息，但是可能会包含个人敏感信息。在一个AR应用中，我们可以加载事先准备好的地图数据：
 
@@ -91,7 +91,51 @@ configuration.initialWorldMap = worldMap
 sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
 ```
 
-当地图被传输到其他用户的设备上时，还需要
+把ARWorldMap传输到其他设备，可以将世界地图和已经添加在地图中的小恐龙模型一并传输。在App界面中添加Mapping Status Label和Send World Map Button。
+
+![](.gitbook/assets/image%20%281%29.png)
+
+Mapping Status Label用于显示当前的`worldMappingStatus`值，只有当`worldMappingStatus`为mapped或extending时才ARWorldMap传输到其他设备，所以当其为.notAvailable和.limited时，将Send World Map Button设定为隐藏。
+
+```swift
+func session(_ session: ARSession, didUpdate frame: ARFrame) {
+    switch frame.worldMappingStatus {
+    case .notAvailable, .limited:
+        sendMapButton.isHidden = true
+    case .extending:
+        sendMapButton.isHidden = multipeerSession.connectedPeers.isEmpty
+    case .mapped:
+        sendMapButton.isHidden = multipeerSession.connectedPeers.isEmpty
+    }
+    mappingStatusLabel.text =  frame.worldMappingStatus.description
+}
+```
+
+当用户点击Send World Map Button按钮时，应用程序调用`getCurrentWorldMap`方法捕获当前的ARWorldMap，然后使用`NSKeyedArchiver`将其序列化为数据对象`data`，然后发送到其他设备。
+
+```swift
+@IBAction func shareSession(_ sender: UIButton) {
+    sceneView.session.getCurrentWorldMap { worldMap, error in
+        guard let map = worldMap
+            else { print("Error: \(error!.localizedDescription)"); return }
+        guard let data = try? NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
+            else { fatalError("can't encode map") }
+        self.multipeerSession.sendToAllPeers(data)
+    }
+}
+```
+
+当其他设备接收到了数据会调用`receivedData(_:from:)`方法，利用`NSKeyedUnarchiver`将`data`反序列化为`worldMap`，加载并重新启动AR会话（清除此前的anchor）。
+
+```swift
+if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: data) {
+    // 加载收到的世界地图并重新启动AR会话
+    let configuration = ARWorldTrackingConfiguration()
+    configuration.initialWorldMap = worldMap
+    sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+```
+
+此时，当接收方设备扫描周围环境，即可重新定位并显示出已有的小恐龙模型。
 
 
 
