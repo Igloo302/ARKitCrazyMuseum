@@ -20,7 +20,7 @@
 3. 另一台设备收到地图并将小恐龙模型显示在相同位置
 4. 在任意一台设备上继续添加小恐龙模型都能被同步
 
-## 配置AR会话
+## 配置会话
 
 首先，我们根据之前的学习创建一个通过点击屏幕放置小恐龙模型的项目。它定义了一个`ARWorldTrackingConfiguration`的AR会话，当`UITapGestureRecognizer`检测到`ARSCNView`上的点击时，`didTap()`方法使用ARKit命中测试查找相交的特征点，在该点处显示3D小恐龙模型。为了方便理解，我们打开特征点显示`sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]`。
 
@@ -137,13 +137,39 @@ if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.sel
 
 此时，当接收方设备扫描周围环境，即可重新定位并显示出已有的小恐龙模型。
 
+## 同步内容
 
+ARWorldMap包含了所有现有的锚点（用户自己添加的小恐龙），但是在之前的程序逻辑中，每次发送-接收完整的ARWorldMap数据时，AR会话会重新启动，接收方需要扫描来进行重新定位，同时捕获并发送ARWorldMap所需要的带宽是比较大的。因此要创造持续的共享AR体验，我们应只传输用户操作的行为的数据，在本项目中，当用户通过点击放置虚拟小恐龙的时候，只将这个新小恐龙的位置信息进行共享。
 
-## 
+我们使用ARAnchor来达到这个目的。当用户点击屏幕时会创建一个新的ARAnchor并将其添加到ARSession中，我们只需要将ARAnchor序列化成data并发送到所有的设备即可：
 
+```swift
+if  let  hitResult =  result.first {
+// 放置一个ARanchor
+let anchor = ARAnchor(name: "dinosaur", transform: hitResult.worldTransform)
+sceneView.session.add(anchor: anchor)
 
+// 发送anchor信息给同伴
+guard let data = try? NSKeyedArchiver.archivedData(withRootObject: anchor, requiringSecureCoding: true)
+    else { fatalError("can't encode anchor") }
+self.multipeerSession.sendToAllPeers(data)
+}
+```
+
+当其他的设备接收到这个data，和之前接收ARWorldMap一样，调用`receivedData(_:from:)`方法：
+
+```swift
+if let anchor = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARAnchor.self, from: data) {
+                // 将anchor添加到会话中
+                sceneView.session.add(anchor: anchor)
+            }
+```
+
+这样，接收方App就会和手动添加一个小恐龙anchor一样完成后续增加Node的工作。
 
 除了本节从介绍的主从多用户策略，iOS 13.0以上还支持对等多用户策略，读者可以查阅这份[文档](https://developer.apple.com/documentation/arkit/creating_a_collaborative_session)学习了解。
+
+## 参考资料
 
 {% embed url="https://developer.apple.com/documentation/arkit/swiftshot\_creating\_a\_game\_for\_augmented\_reality" %}
 
