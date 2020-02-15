@@ -10,10 +10,10 @@
 
 所以说，多用户的实现包含两个部分：
 
-1. ARKit 2新增的特性[ARWorldMap](https://developer.apple.com/documentation/arkit/arworldmap)中包含所有平面锚点和自定义锚点，可以帮助我们获取带有空间信息的数据。
+1. ARKit 2新增的特性[ARWorldMap](https://developer.apple.com/documentation/arkit/arworldmap)中包含ARKit用于在真实世界空间中定位用户设备的所有空间映射信息，可以帮助其他的设备对AR内容“重新定位”。[ARWorldMap](https://developer.apple.com/documentation/arkit/arworldmap)同时包含所有现有的用自定义的锚点。我们也可以只传输ARAnchor对象来同步用户的操作。
 2. 通过MultipeerConnectivity完成数据在设备间传输。
 
-在本节中，我们将创建一个最简单的多用户AR应用，它将完成：
+在本节中，我们将创建一个最简单的多用户AR应用，该应用参考了官方例程，读者可对照阅读。它将完成：
 
 1. 在任意一台设备上添加小恐龙模型
 2. 在某一台设备上发送世界地图
@@ -21,7 +21,36 @@
 
 ## 配置AR会话
 
-首先，我们根据之前的学习创建一个通过点击屏幕放置小恐龙模型的项目。它定义了一个ARWorldTrackingConfiguration的AR会话，当UITapGestureRecognizer检测到ARSCNView上的点击时，didTap方法使用ARKit命中测试在featurePoint中查找交点，在该点处显示3D小恐龙模型。
+首先，我们根据之前的学习创建一个通过点击屏幕放置小恐龙模型的项目。它定义了一个`ARWorldTrackingConfiguration`的AR会话，当`UITapGestureRecognizer`检测到`ARSCNView`上的点击时，`didTap()`方法使用ARKit命中测试查找相交的特征点，在该点处显示3D小恐龙模型。为了方便理解，我们打开特征点显示`sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]`。
+
+在HitTest显示小恐龙模型部分，需要创建一个名为dinosaur的`ARAnchor`并设置位置，将其添加到会话中。
+
+```swift
+let tapPoint = recognizer.location(in: sceneView)
+let result = sceneView.hitTest(tapPoint, types: .featurePoint)
+if  let  hitResult =  result.first {
+    // 放置一个ARanchor
+    let anchor = ARAnchor(name: "dinosaur", transform: hitResult.worldTransform)
+    sceneView.session.add(anchor: anchor)
+```
+
+然后响应`ARSCNViewDelegate`回调`renderer(_:didAdd:for:)`，为每个dinosaur锚点提供SceneKit内容，ARKit将为您添加场景内容并将其放置在场景中。
+
+```swift
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        if let name = anchor.name, name.hasPrefix("dinosaur") {
+            node.addChildNode(loadDinosaurModel())
+        }
+    }
+```
+
+这种方式和此前采用的方式（创建一个`SCNNode`，设置其`simdTransform`，并将其添加为场景的子级`rootNode`）相比的优势在于，当世界跟踪失败，恢复中断的会话，或重新开始会话的时候，可以让ARKit删除锚点，而不会把此前的Node保留在错误的位置。
+
+```swift
+sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+```
+
+同时，采用ARAnchor可以让数据的传输和并在另一台设备上重新定位变更加简单。
 
 ![&#x914D;&#x7F6E;AR&#x4F1A;&#x8BDD;&#x548C;&#x653E;&#x7F6E;&#x865A;&#x62DF;&#x5C0F;&#x6050;&#x9F99;](.gitbook/assets/img_fc337861bdd9-1.jpeg)
 
