@@ -15,9 +15,10 @@
 
 在本节中，我们将创建一个最简单的多用户AR应用，该应用参考了官方例程，读者可对照阅读。它将完成：
 
-1. 在任意一台设备上添加小恐龙模型
-2. 在某一台设备上发送世界地图
+1. 在任意一台设备上扫描周围环境并手动添加小恐龙模型
+2. 发送世界地图到所有连接的设备
 3. 另一台设备收到地图并将小恐龙模型显示在相同位置
+4. 在任意一台设备上继续添加小恐龙模型都能被同步
 
 ## 配置AR会话
 
@@ -54,11 +55,31 @@ sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAn
 
 ![&#x914D;&#x7F6E;AR&#x4F1A;&#x8BDD;&#x548C;&#x653E;&#x7F6E;&#x865A;&#x62DF;&#x5C0F;&#x6050;&#x9F99;](.gitbook/assets/img_fc337861bdd9-1.jpeg)
 
+## Multipeer Connectivity网络
+
+MultipeerConnectivity框架可以帮助我们完成数据在设备间的传输。例程中的`MultipeerSession.swift`构造了`MultipeerSession`类。在`ViewController`中创建`MultipeerSession`实例后，它开始运行`MCNearbyServiceAdvertiser`开始广播，并通过`MCNearbyServiceBrowser`查找其他广播的设备：
+
+```swift
+session = MCSession(peer: myPeerID, securityIdentity: nil, encryptionPreference: .required)
+session.delegate = self
+
+serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerID, discoveryInfo: nil, serviceType: MultipeerSession.serviceType)
+serviceAdvertiser.delegate = self
+serviceAdvertiser.startAdvertisingPeer()
+
+serviceBrowser = MCNearbyServiceBrowser(peer: myPeerID, serviceType: MultipeerSession.serviceType)
+serviceBrowser.delegate = self
+serviceBrowser.startBrowsingForPeers()
+
+```
+
+当发现带有相同`serviceType`的设备时，将会邀请其加入共享会话。收到邀请`MCNearbyServiceAdvertiser`将通过delegate方法接受邀请。
+
 ## AR World Map
 
-ARWorldMap对象使用用户周围的特征点信息，ARKit本身不包含经度/纬度信息，但是可能会包含个人敏感信息。在一个AR应用中，我们可以加载准备好的地图数据：
+ARWorldMap对象使用用户周围的特征点信息和现有的锚点，本身不包含经度/纬度信息，但是可能会包含个人敏感信息。在一个AR应用中，我们可以加载事先准备好的地图数据：
 
-```text
+```swift
 // Unarchive data to ARWorldMap
 let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: data)
 
@@ -74,9 +95,7 @@ sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAn
 
 
 
-## Multipeer Connectivity网络
-
-MultipeerConnectivity可以帮助我们完成数据在设备间的传输。
+## 
 
 
 
