@@ -19,11 +19,37 @@
 2. 在某一台设备上发送世界地图
 3. 另一台设备收到地图并将小恐龙模型显示在相同位置
 
-## 运行AR会话并放置AR内容
+## 配置AR会话
 
-首先，我们根据之前的学习创建一个通过点击屏幕放置小恐龙模型的项目。
+首先，我们根据之前的学习创建一个通过点击屏幕放置小恐龙模型的项目。它定义了一个ARWorldTrackingConfiguration的AR会话，当UITapGestureRecognizer检测到ARSCNView上的点击时，didTap方法使用ARKit命中测试在featurePoint中查找交点，在该点处显示3D小恐龙模型。
 
 ![](.gitbook/assets/img_fc337861bdd9-1.jpeg)
+
+## AR World Map
+
+ARWorldMap对象使用用户周围的特征点信息，ARKit本身不包含经度/纬度信息，但是可能会包含个人敏感信息。在一个AR应用中，我们可以加载准备好的地图数据：
+
+```text
+// Unarchive data to ARWorldMap
+let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: data)
+
+// Create tracking configuration
+let configuration = ARWorldTrackingConfiguration()
+configuration.initialWorldMap = worldMap
+
+// Run session
+sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+```
+
+当地图被传输到其他用户的设备上时，还需要
+
+
+
+## Multipeer Connectivity网络
+
+MultipeerConnectivity可以帮助我们完成数据在设备间的传输。
+
+
 
 除了本节从介绍的主从多用户策略，iOS 13.0以上还支持对等多用户策略，读者可以查阅这份[文档](https://developer.apple.com/documentation/arkit/creating_a_collaborative_session)学习了解。
 
