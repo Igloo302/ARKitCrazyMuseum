@@ -55,7 +55,7 @@ sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAn
 
 ![&#x914D;&#x7F6E;AR&#x4F1A;&#x8BDD;&#x548C;&#x653E;&#x7F6E;&#x865A;&#x62DF;&#x5C0F;&#x6050;&#x9F99;](.gitbook/assets/img_fc337861bdd9-1.jpeg)
 
-## Multipeer Connectivity网络
+## 设备连接
 
 MultipeerConnectivity框架可以帮助我们完成数据在设备间的传输。例程中的`MultipeerSession.swift`构造了`MultipeerSession`类。在`ViewController`中创建`MultipeerSession`实例后，它开始运行`MCNearbyServiceAdvertiser`开始广播，并通过`MCNearbyServiceBrowser`查找其他广播的设备：
 
@@ -75,7 +75,7 @@ serviceBrowser.startBrowsingForPeers()
 
 当发现带有相同`serviceType`的设备时，将会邀请其加入共享会话。收到邀请`MCNearbyServiceAdvertiser`将通过delegate方法接受邀请。
 
-## 捕获并发送AR World Map
+## 共享地图
 
 ARWorldMap对象使用用户周围的特征点信息和现有的锚点，本身不包含经度/纬度信息，但是可能会包含个人敏感信息。在一个AR应用中，我们可以加载事先准备好的地图数据：
 
