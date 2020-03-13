@@ -83,7 +83,7 @@ SpriteKit是用来创建2D模型，2D模型会根据手机的远近放大缩小�
 
 打开Main.storyboard，点击右上方的添加按钮，将`ARKit SceneKit View`拖放到视图控制器上，并设置好约束，让`ARKit SceneKit View`充满全屏。
 
-![&#x8BBE;&#x7F6E;SceneKit View](.gitbook/assets/image%20%2830%29.png)
+![&#x8BBE;&#x7F6E;SceneKit View](.gitbook/assets/image%20%2832%29.png)
 
 ### 连接IBOutlet
 
@@ -93,7 +93,7 @@ SpriteKit是用来创建2D模型，2D模型会根据手机的远近放大缩小�
 import ARKit
 ```
 
-![&#x8FDE;&#x63A5;IBOutlet](.gitbook/assets/image%20%2827%29.png)
+![&#x8FDE;&#x63A5;IBOutlet](.gitbook/assets/image%20%2828%29.png)
 
 然后按住control键并从ARKit SceneKit视图拖拽到ViewController.swift文件。命名为sceneView。
 

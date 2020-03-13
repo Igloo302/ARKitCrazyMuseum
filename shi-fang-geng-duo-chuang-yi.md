@@ -8,13 +8,13 @@
 
 Realitykit是苹果推出的全新AR框架，Realitykit主要由四大组件构成：ARView, Anchor, Scene, Entity。相比我们已经比较熟悉的SceneKit，它在实现渲染、动画、物理效果、网络同步、音频等方面更为强大，使用更为简单。
 
-![img](https://images.xiaozhuanlan.com/photo/2019/a4f13710bb0812b62ac6b555446798d6.png)
+![Realitykit](https://images.xiaozhuanlan.com/photo/2019/a4f13710bb0812b62ac6b555446798d6.png)
 
 至于Reality Composer则是一款专为AR应用设计的建模、构建动画和交互的工具，可以快速制作原型并为AR体验生成内容。它内置了数百个可以自由使用的AR模型，开发者开始自由组合编辑模型，甚至能制作动画，Reality Composer让开发者不需要有很强的3D技术就能创建简单的AR素材。
 
-![](blob:https://app.gitbook.com/b3bbe98e-fbaf-4cf6-9e58-8b3eaf098ad6)
+![Reality Composer](.gitbook/assets/image%20%2831%29.png)
 
-![](blob:https://app.gitbook.com/699df2c7-dd05-4c20-9644-fb55bcf11047)
+![&#x4F7F;&#x7528;Reality Composer&#x53EF;&#x4EE5;&#x65B9;&#x4FBF;&#x5730;&#x7F16;&#x8F91;&#x6750;&#x8D28;](.gitbook/assets/image%20%2826%29.png)
 
 ### ARKit 3
 

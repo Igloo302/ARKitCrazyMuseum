@@ -105,7 +105,7 @@ StoryBoard 的本质是一个 XML 文件，描述了若干窗体、组件、Auto
 
 ![](.gitbook/assets/image%20%289%29.png)
 
-![](.gitbook/assets/image%20%2833%29.png)
+![](.gitbook/assets/image%20%2835%29.png)
 
 ![](.gitbook/assets/image%20%2821%29.png)
 
@@ -119,7 +119,7 @@ StoryBoard 的本质是一个 XML 文件，描述了若干窗体、组件、Auto
 
 按钮，将视图`Main.storyboard`和代码`ViewController.swift`分左右两边显示。这时按住contorl键，拖动刚刚创建的Button到`ViewController.swift`中，设置如下图，就能创建一个按钮按下的事件`takePhoto(_:)`。
 
-![&#x521B;&#x5EFA;&#x4E8B;&#x4EF6;](.gitbook/assets/image%20%2834%29.png)
+![&#x521B;&#x5EFA;&#x4E8B;&#x4EF6;](.gitbook/assets/image%20%2836%29.png)
 
 也就是说，我们需要按钮被按下`takePhoto(_:)`的时候，获取当前画面的图片，并将其保存到手机的相册之中。首先，需要调用`ARSCNView`的`snapshot`方法，就能获取到当前`SceneView`的`UIImage`格式的画面：
 
