@@ -12,6 +12,8 @@
 
 ## 参考资料
 
+本教程在写作过程中，引用了一些参考文档，罗列如下。在每一节中也给出了拓展阅读，可以帮助读者更好理解。
+
 {% embed url="https://github.com/miliPolo/Amazing-ARkit" %}
 
 {% embed url="https://www.appcoda.com/arkit-introduction-scenekit/" %}
