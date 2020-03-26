@@ -35,8 +35,7 @@ guard ARFaceTrackingConfiguration.isSupported else { return }
     }
 ```
 
-当我们启用 `lightEstimationEnabled` 设置时，`ARFaceTrackingConfiguration` 会把检测到的面部作为光探针，来估算出当前环境光的照射方向和亮度信息。  
-`ARFaceTrackingConfiguration`启动后，前置摄像头已经开启并实时检测/追踪人脸信息。当检测到人脸之后，就会添加一个`ARFaceAnchor`到场景中，我们可以通过delegate更新`ARFaceAnchor`的方法来同步更新我们自定义的3D模型。
+当我们启用 `lightEstimationEnabled` 设置时，`ARFaceTrackingConfiguration` 会把检测到的面部作为光探针，来估算出当前环境光的照射方向和亮度信息。 `ARFaceTrackingConfiguration`启动后，前置摄像头已经开启并实时检测/追踪人脸信息。当检测到人脸之后，就会添加一个`ARFaceAnchor`到场景中，我们可以通过delegate更新`ARFaceAnchor`的方法来同步更新我们自定义的3D模型。
 
 如何在面部添加我们想要的虚拟模型呢？对于简单模型来说，相比大家已经驾轻就熟，试着实现一下下面的代码，再想一想ARKit是如何定义面部的坐标系的：
 
@@ -167,7 +166,7 @@ let image = sceneView.snapshot()
 
 {% embed url="https://www.hackingwithswift.com/read/13/5/saving-to-the-ios-photo-library\#" %}
 
-{% embed url="https://juejin.im/post/5c1c938d51882514440e3d72" %}
+
 
 
 
