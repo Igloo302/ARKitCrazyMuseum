@@ -36,9 +36,9 @@ guard ARFaceTrackingConfiguration.isSupported else { return }
 ```
 
 当我们启用 `lightEstimationEnabled` 设置时，`ARFaceTrackingConfiguration` 会把检测到的面部作为光探针，来估算出当前环境光的照射方向和亮度信息。  
-`ARFaceTrackingConfiguration`启动后，前置摄像头已经开启并实时检测/追踪人脸信息。当检测到人脸之后，我们可以通过delegate更新`ARFaceAnchor`的方法来同步更新我们自定义的3D模型。
+`ARFaceTrackingConfiguration`启动后，前置摄像头已经开启并实时检测/追踪人脸信息。当检测到人脸之后，就会添加一个`ARFaceAnchor`到场景中，我们可以通过delegate更新`ARFaceAnchor`的方法来同步更新我们自定义的3D模型。
 
-学习过前面的课程，在面部上绘制一些简单的模型并没有太大的困难：
+如何在面部添加我们想要的虚拟模型呢？对于简单模型来说，相比大家已经驾轻就熟，试着实现一下下面的代码，再想一想ARKit是如何定义面部的坐标系的：
 
 ```swift
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
@@ -51,7 +51,9 @@ guard ARFaceTrackingConfiguration.isSupported else { return }
     }
 ```
 
-如前文所说，ARKit 以 `ARFaceGeometry` 格式提供面部三角网格，利用这个面部网格，我们可以创建一个面部几何体，在上面附加材质实现类似于京剧脸谱的效果。
+另外，因为面部形状是非常复杂的，ARKit提供与用户脸部的大小，形状，拓扑和当前面部表情相匹配的粗略3D网格几何，我们可以通过`ARSCNFaceGeometry`在脸部贴上虚拟面具、化妆、纹身等。
+
+我们可以创建一个面部几何体，在上面附加材质实现类似于京剧脸谱的效果。首先初始化一个`ARSCNFaceGeometry`对象，然后将该几何图形分配给`ARFaceAnchor`锚点的SceneKit节点：
 
 ```swift
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
@@ -165,7 +167,7 @@ let image = sceneView.snapshot()
 
 {% embed url="https://www.hackingwithswift.com/read/13/5/saving-to-the-ios-photo-library\#" %}
 
-
+{% embed url="https://juejin.im/post/5c1c938d51882514440e3d72" %}
 
 
 
