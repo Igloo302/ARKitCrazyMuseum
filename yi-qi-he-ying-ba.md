@@ -166,6 +166,8 @@ let image = sceneView.snapshot()
 
 {% embed url="https://www.hackingwithswift.com/read/13/5/saving-to-the-ios-photo-library\#" %}
 
+{% embed url="https://juejin.im/post/5c1c938d51882514440e3d72" %}
+
 
 
 
