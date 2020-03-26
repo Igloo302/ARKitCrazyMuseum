@@ -95,7 +95,7 @@ import ARKit
 
 ![&#x8FDE;&#x63A5;IBOutlet](.gitbook/assets/image%20%2828%29.png)
 
-然后按住control键并从ARKit SceneKit视图拖拽到ViewController.swift文件。命名为sceneView。
+然后按住control键，将ARKit SceneKit视图拖拽到ViewController.swift文件。命名为sceneView。
 
 ### 配置ARSCNView会话
 
