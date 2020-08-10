@@ -108,7 +108,7 @@ StoryBoard 的本质是一个 XML 文件，描述了若干窗体、组件、Auto
 
 ![](.gitbook/assets/image-35.png)
 
-![](.gitbook/assets/image%20%2821%29.png)
+![](.gitbook/assets/image-21.png)
 
 这样就完成了Button的大小和位置的布局。如果菜单栏上方出现警告符号，可以点击查看有哪些约束没有完成设置，读者可以自行尝试将不同形状的按钮放在不同的位置。
 
@@ -116,11 +116,11 @@ StoryBoard 的本质是一个 XML 文件，描述了若干窗体、组件、Auto
 
 此时点击编辑区域右上方的
 
-![](.gitbook/assets/image%20%2822%29.png)
+![](.gitbook/assets/image-22.png)
 
 按钮，将视图`Main.storyboard`和代码`ViewController.swift`分左右两边显示。这时按住contorl键，拖动刚刚创建的Button到`ViewController.swift`中，设置如下图，就能创建一个按钮按下的事件`takePhoto(_:)`。
 
-![&#x521B;&#x5EFA;&#x4E8B;&#x4EF6;](.gitbook/assets/image%20%2836%29.png)
+![](.gitbook/assets/image-36.png)
 
 也就是说，我们需要按钮被按下`takePhoto(_:)`的时候，获取当前画面的图片，并将其保存到手机的相册之中。首先，需要调用`ARSCNView`的`snapshot`方法，就能获取到当前`SceneView`的`UIImage`格式的画面：
 
@@ -130,7 +130,7 @@ let image = sceneView.snapshot()
 
 将`image`存储到手机的相册之中和使用摄像头一样，需要在Info.plist配置请求照片相关的描述。
 
-![](.gitbook/assets/image%20%2823%29.png)
+![](.gitbook/assets/image-23.png)
 
 
 
