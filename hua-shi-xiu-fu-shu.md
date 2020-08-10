@@ -8,7 +8,9 @@
 
 ![&#x4F7F;&#x7528;iOS&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x626B;&#x63CF;&#x73B0;&#x5B9E;&#x4E16;&#x754C;&#x5BF9;&#x8C61;](.gitbook/assets/image-6.png)
 
-在这里，我们选用可乐瓶、鼠标和一台游戏机作为我们的识别对象。经过设置应用、放置物体、定义边界框、扫描物体、调整原点和坐标轴、测试并导出的流程后（![](.gitbook/assets/32.png)![](.gitbook/assets/33.png)![](.gitbook/assets/34.png)），即可获得各个物体的`.arobject`文件。
+在这里，我们选用可乐瓶、鼠标和一台游戏机作为我们的识别对象。经过设置应用、放置物体、定义边界框、扫描物体、调整原点和坐标轴、测试并导出的流程后，即可获得各个物体的`.arobject`文件。
+
+<img src=".gitbook/assets/32.png" style="zoom:25%;" /><img src=".gitbook/assets/33.png" style="zoom:25%;" /><img src=".gitbook/assets/34.png" style="zoom:25%;" />）
 
 ## 导入参考对象
 
