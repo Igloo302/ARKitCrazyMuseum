@@ -6,7 +6,7 @@
 
 ## 项目例程
 
-项目中涉及到的程序代码可以从GitHub中获取，在学习之前先克隆这个仓库：
+项目中涉及到的程序代码可以从GitHub中获取，在学习之前建议先克隆这个仓库：
 
 {% embed url="https://github.com/Igloo302/ARKitCrazyMuseum-Project" %}
 
