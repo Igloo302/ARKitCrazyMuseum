@@ -3,7 +3,7 @@
 * [前言](README.md)
 * [ARKit 概述](arkit-gai-shu.md)
 * [Hello AR World](hello-ar-world.md)
-* [自定义模型](zi-ding-yi-mo-xing.md)
+* [自定义模型](diy-model.md)
 * [寻找平面展台](xun-zhao-ping-mian-zhan-tai.md)
 * [放置小恐龙](fang-zhi-xiao-kong-long.md)
 * [读懂一幅图](du-dong-yi-fu-tu.md)
