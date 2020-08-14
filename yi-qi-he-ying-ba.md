@@ -83,7 +83,7 @@ guard ARFaceTrackingConfiguration.isSupported else { return }
     }
 ```
 
-另外，[官方文档](https://app.gitbook.com/@igloo/s/arkit-crazy-museum/yi-qi-he-ying-ba)中提供了几种基于人脸的ARKit使用案例，包括用混合形状动画化一个人物，将3D内容放在用户脸上，使用面几何来建模用户脸部等，读者可以自己进行尝试。
+另外，[官方文档](https://developer.apple.com/documentation/arkit/tracking_and_visualizing_faces)中提供了几种基于人脸的ARKit使用案例，包括用混合形状动画化一个人物，将3D内容放在用户脸上，使用面几何来建模用户脸部等，读者可以自己进行尝试。
 
 ## 按钮布局
 
